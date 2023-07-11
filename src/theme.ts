@@ -2,11 +2,14 @@ import { extendTheme } from "@chakra-ui/react";
 
 const extendedTheme = extendTheme({
   fonts: {
-    body: `'Rubik', sans-serif`,
+    heading: `'Rubik', sans-serif`,
+    input: `'Rubik', sans-serif`,
   },
   colors: {
-    darkGray: "hsl(0, 0%, 59%)",
-    veryDarkGray: "hsl(0, 0%, 17%)",
+    custom: {
+      darkGray: "hsl(0, 0%, 59%)",
+      veryDarkGray: "hsl(0, 0%, 17%)",
+    },
   },
   components: {
     Input: {
