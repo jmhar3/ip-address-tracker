@@ -6,14 +6,11 @@ import {
   Heading,
   ChakraProvider,
   useBreakpointValue,
-  Input,
-  InputGroup,
-  InputRightElement,
-  IconButton,
 } from "@chakra-ui/react";
 
 import extendedTheme from "./theme";
 import { SearchInput } from "./components/SearchInput";
+import { InfoCard } from "./components/InfoCard";
 
 export const App = () => {
   // const isMobile = useBreakpointValue({ base: true, md: false });
@@ -35,6 +32,8 @@ export const App = () => {
         <Heading color="white">IP Address Tracker</Heading>
 
         <SearchInput />
+
+        <InfoCard />
       </Stack>
     </ChakraProvider>
   );

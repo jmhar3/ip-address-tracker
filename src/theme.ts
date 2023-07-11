@@ -11,6 +11,10 @@ const extendedTheme = extendTheme({
       veryDarkGray: "hsl(0, 0%, 17%)",
     },
   },
+  breakpoints: {
+    base: "375px",
+    md: "1440px",
+  },
   components: {
     Input: {
       baseStyle: {
