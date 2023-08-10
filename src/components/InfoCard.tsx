@@ -2,12 +2,35 @@ import * as React from "react";
 
 import { Text, Stack, StackDivider, Center } from "@chakra-ui/react";
 
+export interface SearchResults {
+  ip: string;
+  isp: string;
+  location: {
+    region: string;
+    city: string;
+    postalCode: string;
+    timezone: string;
+  };
+}
+
 export interface InfoStatProps {
   label: string;
   stat: string;
 }
 
-export const InfoCard = () => {
+export interface InfoCardProps {
+  searchResults: SearchResults;
+}
+
+export const InfoCard = (props: InfoCardProps) => {
+  const {
+    searchResults: {
+      ip,
+      isp,
+      location: { city, region, postalCode, timezone },
+    },
+  } = props;
+
   return (
     <Center h="161px" w="1110px" bg="white" rounded="15px">
       <Stack
@@ -17,10 +40,10 @@ export const InfoCard = () => {
         divider={<StackDivider />}
         direction={{ base: "column", md: "row" }}
       >
-        <InfoStat label="IP ADDRESS" stat="192.212.174.101" />
-        <InfoStat label="LOCATION" stat="Brooklyn, NY 10001" />
-        <InfoStat label="TIMEZONE" stat="UTC -05:00" />
-        <InfoStat label="ISP" stat="SpaceX Starlink" />
+        <InfoStat label="IP ADDRESS" stat={ip} />
+        <InfoStat label="LOCATION" stat={`${city}, ${region} ${postalCode}`} />
+        <InfoStat label="TIMEZONE" stat={"UTC " + timezone} />
+        <InfoStat label="ISP" stat={isp} />
       </Stack>
     </Center>
   );

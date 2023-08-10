@@ -9,15 +9,44 @@ import {
 } from "@chakra-ui/react";
 
 import extendedTheme from "./theme";
+import { Map } from "./components/Map";
+import { InfoCard, SearchResults } from "./components/InfoCard";
 import { SearchInput } from "./components/SearchInput";
-import { InfoCard } from "./components/InfoCard";
+import { useFetch } from "usehooks-ts";
 
 export const App = () => {
+  console.log("Hello World");
+  const IpGeoApiUrl =
+    "https://geo.ipify.org/api/v2/country,city?apiKey=at_yrSadvZJztUqq6lVAHT6vTXDRg2f8";
+
   // const isMobile = useBreakpointValue({ base: true, md: false });
+
+  const [queryUrl, setQueryUrl] = React.useState<string | undefined>(
+    IpGeoApiUrl
+  );
+
+  const { data: searchResults } = useFetch<SearchResults>(queryUrl);
+
+  const onSubmit = React.useCallback(
+    (searchQuery: string | undefined) => {
+      console.log("Submit searchQuery", searchQuery);
+      if (searchQuery) {
+        console.log("searchQuery exists");
+        if (/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/.test(searchQuery)) {
+          setQueryUrl(`${IpGeoApiUrl}&ipAddress=${searchQuery}`);
+        } else {
+          setQueryUrl(`${IpGeoApiUrl}&domain=www.${searchQuery})`);
+        }
+        return;
+      }
+      setQueryUrl(IpGeoApiUrl);
+    },
+    [setQueryUrl, IpGeoApiUrl]
+  );
 
   return (
     <ChakraProvider theme={extendedTheme}>
-      <Stack>
+      <Stack direction="column">
         <Image src="/images/pattern-bg-desktop.png" />
       </Stack>
 
@@ -31,9 +60,9 @@ export const App = () => {
       >
         <Heading color="white">IP Address Tracker</Heading>
 
-        <SearchInput />
+        <SearchInput onSubmit={onSubmit} />
 
-        <InfoCard />
+        {searchResults && <InfoCard searchResults={searchResults} />}
       </Stack>
     </ChakraProvider>
   );
