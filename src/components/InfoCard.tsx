@@ -6,10 +6,12 @@ export interface SearchResults {
   ip: string;
   isp: string;
   location: {
-    region: string;
+    lat: number;
+    lng: number;
     city: string;
-    postalCode: string;
+    region: string;
     timezone: string;
+    postalCode: string;
   };
 }
 
@@ -41,7 +43,10 @@ export const InfoCard = (props: InfoCardProps) => {
         direction={{ base: "column", md: "row" }}
       >
         <InfoStat label="IP ADDRESS" stat={ip} />
-        <InfoStat label="LOCATION" stat={`${city}, ${region} ${postalCode}`} />
+        <InfoStat
+          label="LOCATION"
+          stat={`${city}, ${region.replace(/state of/i, "")} ${postalCode}`}
+        />
         <InfoStat label="TIMEZONE" stat={"UTC " + timezone} />
         <InfoStat label="ISP" stat={isp} />
       </Stack>

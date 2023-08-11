@@ -15,7 +15,6 @@ import { SearchInput } from "./components/SearchInput";
 import { useFetch } from "usehooks-ts";
 
 export const App = () => {
-  console.log("Hello World");
   const IpGeoApiUrl =
     "https://geo.ipify.org/api/v2/country,city?apiKey=at_yrSadvZJztUqq6lVAHT6vTXDRg2f8";
 
@@ -46,24 +45,34 @@ export const App = () => {
 
   return (
     <ChakraProvider theme={extendedTheme}>
-      <Stack direction="column">
-        <Image src="/images/pattern-bg-desktop.png" />
-      </Stack>
+      {searchResults && (
+        <>
+          <Stack direction="column">
+            <Image src="/images/pattern-bg-desktop.png" />
+            <Map
+              location={[
+                searchResults.location.lat,
+                searchResults.location.lng,
+              ]}
+            />
+          </Stack>
 
-      <Stack
-        top="0"
-        w="full"
-        p="33px"
-        align="center"
-        spacing="33px"
-        position="fixed"
-      >
-        <Heading color="white">IP Address Tracker</Heading>
+          <Stack
+            top="0"
+            w="full"
+            p="33px"
+            align="center"
+            spacing="33px"
+            position="fixed"
+          >
+            <Heading color="white">IP Address Tracker</Heading>
 
-        <SearchInput onSubmit={onSubmit} />
+            <SearchInput onSubmit={onSubmit} />
 
-        {searchResults && <InfoCard searchResults={searchResults} />}
-      </Stack>
+            <InfoCard searchResults={searchResults} />
+          </Stack>
+        </>
+      )}
     </ChakraProvider>
   );
 };
