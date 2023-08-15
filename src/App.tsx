@@ -4,6 +4,7 @@ import {
   Image,
   Stack,
   Heading,
+  useToast,
   ChakraProvider,
   useBreakpointValue,
 } from "@chakra-ui/react";
@@ -21,11 +22,15 @@ export const App = () => {
 
   // const isMobile = useBreakpointValue({ base: true, md: false });
 
+  const toast = useToast();
+
   const [queryUrl, setQueryUrl] = React.useState<string | undefined>(
     IpGeoApiUrl
   );
 
-  const { data: searchResults } = useFetch<SearchResults>(queryUrl);
+  const [searchResults, setSearchResults] = React.useState<SearchResults>();
+
+  const { data, error } = useFetch<SearchResults>(queryUrl);
 
   const location = React.useMemo<LatLngTuple | undefined>(
     () =>
@@ -35,9 +40,7 @@ export const App = () => {
 
   const onSubmit = React.useCallback(
     (searchQuery: string | undefined) => {
-      console.log("Submit searchQuery", searchQuery);
       if (searchQuery) {
-        console.log("searchQuery exists");
         if (/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/.test(searchQuery)) {
           setQueryUrl(`${IpGeoApiUrl}&ipAddress=${searchQuery}`);
         } else {
@@ -49,6 +52,20 @@ export const App = () => {
     },
     [setQueryUrl, IpGeoApiUrl]
   );
+
+  React.useEffect(() => {
+    if (data) {
+      setSearchResults(data);
+    } else {
+      toast({
+        title: "Invalid Query",
+        description: "No results have been found matching your query",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }, [data]);
 
   return (
     <ChakraProvider theme={extendedTheme}>
