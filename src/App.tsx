@@ -57,13 +57,14 @@ export const App = () => {
     if (data) {
       setSearchResults(data);
     } else {
-      toast({
-        title: "Invalid Query",
-        description: "No results have been found matching your query",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      error &&
+        toast({
+          title: "Invalid Query",
+          description: "No results have been found matching your query",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
     }
   }, [data]);
 

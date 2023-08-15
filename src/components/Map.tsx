@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box } from "@chakra-ui/react";
-import { LatLngTuple } from "leaflet";
+import { Icon, LatLngTuple, Point } from "leaflet";
 
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
@@ -33,3 +33,15 @@ export const Map = (props: MapProps) => {
     </Box>
   );
 };
+
+// const CustomIcon = new Icon({
+//   iconUrl: require("/images/icon-location.svg"),
+//   iconRetinaUrl: require("/images/icon-location.svg"),
+//   iconAnchor: undefined,
+//   popupAnchor: undefined,
+//   shadowUrl: undefined,
+//   shadowSize: undefined,
+//   shadowAnchor: undefined,
+//   iconSize: new Point(60, 75),
+//   className: "leaflet-div-icon",
+// });
