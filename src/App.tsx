@@ -61,7 +61,7 @@ export const App = () => {
         title: "Invalid Query",
         description: "No results have been found matching your query",
         status: "error",
-        duration: 9000,
+        duration: 5000,
         isClosable: true,
       });
     }
@@ -81,6 +81,7 @@ export const App = () => {
         align="center"
         spacing="33px"
         position="fixed"
+        zIndex={99}
       >
         <Heading color="white">IP Address Tracker</Heading>
 

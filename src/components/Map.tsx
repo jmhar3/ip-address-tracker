@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { LatLngTuple } from "leaflet";
 
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 export interface MapProps {
   location: LatLngTuple;
@@ -17,8 +17,9 @@ export const Map = (props: MapProps) => {
   };
 
   return (
-    <Box h="3000px" w="100%" bg="gray.100">
+    <Box h="600px" w="100%" bg="gray.100">
       <MapContainer
+        style={{ height: "100%", zIndex: 1 }}
         center={mapState.center}
         zoom={mapState.zoom}
         scrollWheelZoom={false}
