@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { LatLngTuple } from "leaflet";
 
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 export interface MapProps {
   location: LatLngTuple;
@@ -11,13 +11,13 @@ export interface MapProps {
 export const Map = (props: MapProps) => {
   const { location } = props;
 
-  const [mapState, setMapState] = React.useState({
+  const mapState = {
     center: location,
     zoom: 12,
-  });
+  };
 
   return (
-    <Box h="3000px" w="100%">
+    <Box h="3000px" w="100%" bg="gray.100">
       <MapContainer
         center={mapState.center}
         zoom={mapState.zoom}
@@ -27,11 +27,7 @@ export const Map = (props: MapProps) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={location}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        <Marker position={location} />
       </MapContainer>
     </Box>
   );

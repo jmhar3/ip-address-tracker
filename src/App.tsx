@@ -13,6 +13,7 @@ import { Map } from "./components/Map";
 import { InfoCard, SearchResults } from "./components/InfoCard";
 import { SearchInput } from "./components/SearchInput";
 import { useFetch } from "usehooks-ts";
+import { LatLngTuple } from "leaflet";
 
 export const App = () => {
   const IpGeoApiUrl =
@@ -25,6 +26,12 @@ export const App = () => {
   );
 
   const { data: searchResults } = useFetch<SearchResults>(queryUrl);
+
+  const location = React.useMemo<LatLngTuple | undefined>(
+    () =>
+      searchResults && [searchResults.location.lat, searchResults.location.lng],
+    [searchResults]
+  );
 
   const onSubmit = React.useCallback(
     (searchQuery: string | undefined) => {
@@ -45,34 +52,25 @@ export const App = () => {
 
   return (
     <ChakraProvider theme={extendedTheme}>
-      {searchResults && (
-        <>
-          <Stack direction="column">
-            <Image src="/images/pattern-bg-desktop.png" />
-            <Map
-              location={[
-                searchResults.location.lat,
-                searchResults.location.lng,
-              ]}
-            />
-          </Stack>
+      <Stack direction="column" gap="0">
+        <Image src="/images/pattern-bg-desktop.png" />
+        {location && <Map location={location} />}
+      </Stack>
 
-          <Stack
-            top="0"
-            w="full"
-            p="33px"
-            align="center"
-            spacing="33px"
-            position="fixed"
-          >
-            <Heading color="white">IP Address Tracker</Heading>
+      <Stack
+        top="0"
+        w="full"
+        p="33px"
+        align="center"
+        spacing="33px"
+        position="fixed"
+      >
+        <Heading color="white">IP Address Tracker</Heading>
 
-            <SearchInput onSubmit={onSubmit} />
+        <SearchInput onSubmit={onSubmit} />
 
-            <InfoCard searchResults={searchResults} />
-          </Stack>
-        </>
-      )}
+        {searchResults && <InfoCard searchResults={searchResults} />}
+      </Stack>
     </ChakraProvider>
   );
 };
