@@ -25,7 +25,9 @@ export const Front = (props: FrontProps) => {
       p={{ base: "21px", md: "33px" }}
       spacing={{ base: "21px", md: "33px" }}
     >
-      <Heading color="white">IP Address Tracker</Heading>
+      <Heading color="white" fontSize={{ base: "26", md: "32" }}>
+        IP Address Tracker
+      </Heading>
 
       <SearchInput onSubmit={onSubmit} />
 

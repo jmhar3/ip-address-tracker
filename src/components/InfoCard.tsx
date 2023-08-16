@@ -43,18 +43,18 @@ export const InfoCard = (props: InfoCardProps) => {
 
   return (
     <Center
-      p="9"
+      p={{ base: "6", md: "9" }}
       bg="white"
       rounded="15px"
       h="fit-content"
       w={{ base: "full", md: "fit-content" }}
     >
       <Stack
-        gap="6"
+        gap={{ base: "4", md: "6" }}
         w="full"
         align="flex-start"
         justify="space-evenly"
-        divider={!isMobile ? undefined : <StackDivider />}
+        divider={isMobile ? undefined : <StackDivider />}
         direction={{ base: "column", md: "row" }}
       >
         <InfoStat label="IP ADDRESS" stat={ip} />
@@ -81,11 +81,16 @@ const InfoStat = (props: InfoStatProps) => {
       w={{ base: "full", md: "213px" }}
       textAlign={{ base: "center", md: "left" }}
     >
-      <Text fontSize="12" fontWeight="bold" color="custom.darkGray">
+      <Text
+        fontSize={{ base: "10", md: "12" }}
+        fontWeight="bold"
+        color="custom.darkGray"
+      >
         {label}
       </Text>
+
       <Text
-        fontSize="26"
+        fontSize={{ base: "20", md: "26" }}
         overflow="wrap"
         fontWeight="medium"
         color="custom.veryDarkGray"
