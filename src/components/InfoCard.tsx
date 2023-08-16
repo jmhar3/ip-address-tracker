@@ -1,6 +1,12 @@
 import * as React from "react";
 
-import { Text, Stack, StackDivider, Center } from "@chakra-ui/react";
+import {
+  Text,
+  Stack,
+  StackDivider,
+  Center,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 export interface SearchResults {
   ip: string;
@@ -33,13 +39,22 @@ export const InfoCard = (props: InfoCardProps) => {
     },
   } = props;
 
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
-    <Center h="161px" w="1110px" bg="white" rounded="15px">
+    <Center
+      p="9"
+      bg="white"
+      rounded="15px"
+      h="fit-content"
+      w={{ base: "full", md: "fit-content" }}
+    >
       <Stack
+        gap="6"
         w="full"
         align="flex-start"
         justify="space-evenly"
-        divider={<StackDivider />}
+        divider={!isMobile ? undefined : <StackDivider />}
         direction={{ base: "column", md: "row" }}
       >
         <InfoStat label="IP ADDRESS" stat={ip} />
@@ -61,7 +76,11 @@ export const InfoCard = (props: InfoCardProps) => {
 const InfoStat = (props: InfoStatProps) => {
   const { label, stat } = props;
   return (
-    <Stack textAlign="left">
+    <Stack
+      gap="0"
+      w={{ base: "full", md: "213px" }}
+      textAlign={{ base: "center", md: "left" }}
+    >
       <Text fontSize="12" fontWeight="bold" color="custom.darkGray">
         {label}
       </Text>

@@ -29,7 +29,7 @@ export const SearchInput = (props: SearchInputProps) => {
   );
 
   return (
-    <InputGroup w="555px" h="58px">
+    <InputGroup w={{ base: "full", md: "555px" }} h="58px">
       <Input
         h="full"
         bg="white"

@@ -7,7 +7,7 @@ import { SearchInput } from "./SearchInput";
 
 export interface FrontProps {
   onSubmit: (searchQuery?: string) => void;
-  searchResults?: SearchResults
+  searchResults?: SearchResults;
 }
 
 export const Front = (props: FrontProps) => {
@@ -19,11 +19,11 @@ export const Front = (props: FrontProps) => {
     <Stack
       top="0"
       w="full"
-      p="33px"
-      align="center"
-      spacing="33px"
-      position="fixed"
       zIndex={99}
+      align="center"
+      position="fixed"
+      p={{ base: "21px", md: "33px" }}
+      spacing={{ base: "21px", md: "33px" }}
     >
       <Heading color="white">IP Address Tracker</Heading>
 

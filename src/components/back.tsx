@@ -16,7 +16,13 @@ export const Back = (props: BackProps) => {
 
   return (
     <Stack direction="column" gap="0">
-      <Image src="/images/pattern-bg-desktop.png" />
+      <Image
+        src={
+          isMobile
+            ? "/images/pattern-bg-mobile.png"
+            : "/images/pattern-bg-desktop.png"
+        }
+      />
       {location && <Map location={location} />}
     </Stack>
   );
