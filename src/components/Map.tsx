@@ -28,20 +28,15 @@ export const Map = (props: MapProps) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={location} />
+        <Marker position={location} icon={CustomIcon} />
       </MapContainer>
     </Box>
   );
 };
 
-// const CustomIcon = new Icon({
-//   iconUrl: require("/images/icon-location.svg"),
-//   iconRetinaUrl: require("/images/icon-location.svg"),
-//   iconAnchor: undefined,
-//   popupAnchor: undefined,
-//   shadowUrl: undefined,
-//   shadowSize: undefined,
-//   shadowAnchor: undefined,
-//   iconSize: new Point(60, 75),
-//   className: "leaflet-div-icon",
-// });
+const CustomIcon = new Icon({
+  iconUrl: require("../images/icon-location.svg"),
+  iconRetinaUrl: require("../images/icon-location.svg"),
+  iconSize: new Point(60, 75),
+  className: "leaflet-div-icon",
+});

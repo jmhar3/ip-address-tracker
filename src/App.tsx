@@ -1,26 +1,20 @@
 import * as React from "react";
 
-import {
-  Image,
-  Stack,
-  Heading,
-  useToast,
-  ChakraProvider,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import extendedTheme from "./theme";
-import { Map } from "./components/Map";
-import { InfoCard, SearchResults } from "./components/InfoCard";
-import { SearchInput } from "./components/SearchInput";
+
+import { useToast } from "@chakra-ui/react";
+
+import { SearchResults } from "./components/InfoCard";
 import { useFetch } from "usehooks-ts";
 import { LatLngTuple } from "leaflet";
+import { Back } from "./components/back";
+import { Front } from "./components/front";
 
 export const App = () => {
   const IpGeoApiUrl =
     "https://geo.ipify.org/api/v2/country,city?apiKey=at_yrSadvZJztUqq6lVAHT6vTXDRg2f8";
-
-  // const isMobile = useBreakpointValue({ base: true, md: false });
 
   const toast = useToast();
 
@@ -39,7 +33,7 @@ export const App = () => {
   );
 
   const onSubmit = React.useCallback(
-    (searchQuery: string | undefined) => {
+    (searchQuery?: string) => {
       if (searchQuery) {
         if (/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/.test(searchQuery)) {
           setQueryUrl(`${IpGeoApiUrl}&ipAddress=${searchQuery}`);
@@ -70,26 +64,8 @@ export const App = () => {
 
   return (
     <ChakraProvider theme={extendedTheme}>
-      <Stack direction="column" gap="0">
-        <Image src="/images/pattern-bg-desktop.png" />
-        {location && <Map location={location} />}
-      </Stack>
-
-      <Stack
-        top="0"
-        w="full"
-        p="33px"
-        align="center"
-        spacing="33px"
-        position="fixed"
-        zIndex={99}
-      >
-        <Heading color="white">IP Address Tracker</Heading>
-
-        <SearchInput onSubmit={onSubmit} />
-
-        {searchResults && <InfoCard searchResults={searchResults} />}
-      </Stack>
+      <Back location={location} />
+      <Front searchResults={searchResults} onSubmit={onSubmit} />
     </ChakraProvider>
   );
 };

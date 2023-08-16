@@ -45,9 +45,13 @@ export const InfoCard = (props: InfoCardProps) => {
         <InfoStat label="IP ADDRESS" stat={ip} />
         <InfoStat
           label="LOCATION"
-          stat={`${city}, ${region.replace(/state of/i, "")} ${postalCode}`}
+          stat={
+            city &&
+            (region || postalCode) &&
+            `${city}, ${region.replace(/state of/i, "")} ${postalCode}`
+          }
         />
-        <InfoStat label="TIMEZONE" stat={"UTC " + timezone} />
+        <InfoStat label="TIMEZONE" stat={timezone && "UTC " + timezone} />
         <InfoStat label="ISP" stat={isp} />
       </Stack>
     </Center>
