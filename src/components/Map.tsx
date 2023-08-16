@@ -17,12 +17,13 @@ export const Map = (props: MapProps) => {
   };
 
   return (
-    <Box h="600px" w="100%" bg="gray.100">
+    <Box h={{ base: "450px", md: "600px" }} w="100%" bg="gray.100">
       <MapContainer
-        style={{ height: "100%", zIndex: 1 }}
-        center={mapState.center}
+        zoomControl={false}
         zoom={mapState.zoom}
+        center={mapState.center}
         scrollWheelZoom={false}
+        style={{ height: "100%", zIndex: 1 }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

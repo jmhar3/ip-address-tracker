@@ -13,8 +13,6 @@ export interface FrontProps {
 export const Front = (props: FrontProps) => {
   const { onSubmit, searchResults } = props;
 
-  const isMobile = useBreakpointValue({ base: true, md: false });
-
   return (
     <Stack
       top="0"

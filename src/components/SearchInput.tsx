@@ -23,8 +23,14 @@ export const SearchInput = (props: SearchInputProps) => {
     [setSearchQuery]
   );
 
-  const onSubmitQuery = React.useCallback(
+  const onClickSubmit = React.useCallback(
     () => onSubmit(searchQuery),
+    [onSubmit, searchQuery]
+  );
+
+  const onEnterSubmit = React.useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) =>
+      event.key == "13" && onSubmit(searchQuery),
     [onSubmit, searchQuery]
   );
 
@@ -35,6 +41,7 @@ export const SearchInput = (props: SearchInputProps) => {
         bg="white"
         rounded="15px"
         onChange={onChange}
+        onKeyDown={onEnterSubmit}
         placeholder="Search for any IP address or domain"
       />
       <InputRightElement h="full" w="58px">
@@ -45,7 +52,7 @@ export const SearchInput = (props: SearchInputProps) => {
           rounded="0"
           roundedRight="15px"
           aria-label="submit"
-          onClick={onSubmitQuery}
+          onClick={onClickSubmit}
           icon={<Image src="/images/icon-arrow.svg" />}
           _hover={{ bg: "custom.veryDarkGray" }}
         />
