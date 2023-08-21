@@ -12,7 +12,7 @@ export interface MapProps {
 export const Map = (props: MapProps) => {
   const { location } = props;
 
-  const CustomIcon = new Icon({
+  const customIcon = new Icon({
     iconUrl: marker,
     iconRetinaUrl: marker,
     className: "leaflet-div-icon",
@@ -31,7 +31,7 @@ export const Map = (props: MapProps) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {location && <Marker position={location} icon={CustomIcon} />}
+        {location && <Marker position={location} icon={customIcon} />}
       </MapContainer>
     </Box>
   );
