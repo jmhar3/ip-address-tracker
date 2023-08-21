@@ -12,6 +12,12 @@ export interface MapProps {
 export const Map = (props: MapProps) => {
   const { location } = props;
 
+  const CustomIcon = new Icon({
+    iconUrl: marker,
+    iconRetinaUrl: marker,
+    className: "leaflet-div-icon",
+  });
+
   return (
     <Box h={{ base: "450px", md: "600px" }} w="100%" bg="gray.100">
       <MapContainer
@@ -30,12 +36,6 @@ export const Map = (props: MapProps) => {
     </Box>
   );
 };
-
-const CustomIcon = new Icon({
-  iconUrl: marker,
-  iconRetinaUrl: marker,
-  className: "leaflet-div-icon",
-});
 
 const ChangeView = (props: { location: LatLngTuple }) => {
   const map = useMap();
