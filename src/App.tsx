@@ -37,9 +37,9 @@ export const App = () => {
       if (searchQuery) {
         if (/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/.test(searchQuery)) {
           setQueryUrl(`${IpGeoApiUrl}&ipAddress=${searchQuery}`);
-        } else {
-          setQueryUrl(`${IpGeoApiUrl}&domain=www.${searchQuery})`);
+          return;
         }
+        setQueryUrl(`${IpGeoApiUrl}&domain=www.${searchQuery})`);
         return;
       }
       setQueryUrl(IpGeoApiUrl);
