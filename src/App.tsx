@@ -50,17 +50,18 @@ export const App = () => {
   React.useEffect(() => {
     if (data) {
       setSearchResults(data);
-    } else {
-      error &&
-        toast({
-          title: "Invalid Query",
-          description: "No results have been found matching your query",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
     }
-  }, [data]);
+
+    if (!data && error) {
+      toast({
+        title: "Invalid Query",
+        description: "No results have been found matching your query",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }, [data, ]);
 
   return (
     <ChakraProvider theme={extendedTheme}>
