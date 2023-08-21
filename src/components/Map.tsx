@@ -16,7 +16,6 @@ export const Map = (props: MapProps) => {
         zoom={12}
         center={location}
         zoomControl={false}
-        scrollWheelZoom={false}
         style={{ height: "100%", zIndex: 1 }}
       >
         {location && <ChangeView location={location} />}
