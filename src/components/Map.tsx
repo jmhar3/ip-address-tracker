@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { Icon, LatLngTuple, Point } from "leaflet";
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
+
+import marker from "../images/icon-location.svg";
 
 export interface MapProps {
   location?: LatLngTuple;
@@ -10,8 +12,8 @@ export interface MapProps {
 export const Map = (props: MapProps) => {
   const { location } = props;
 
-  const displayMap = React.useMemo(
-    () => (
+  return (
+    <Box h={{ base: "450px", md: "600px" }} w="100%" bg="gray.100">
       <MapContainer
         zoom={12}
         center={location}
@@ -23,25 +25,17 @@ export const Map = (props: MapProps) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {location && <Marker position={location} />}
+        {location && <Marker position={location} icon={CustomIcon} />}
       </MapContainer>
-    ),
-    [location]
-  );
-
-  return (
-    <Box h={{ base: "450px", md: "600px" }} w="100%" bg="gray.100">
-      {displayMap}
     </Box>
   );
 };
 
-// const CustomIcon = new Icon({
-//   iconUrl: require("../images/icon-location.svg"),
-//   iconRetinaUrl: require("../images/icon-location.svg"),
-//   iconSize: new Point(60, 75),
-//   className: "leaflet-div-icon",
-// });
+const CustomIcon = new Icon({
+  iconUrl: marker,
+  iconRetinaUrl: marker,
+  className: "leaflet-div-icon",
+});
 
 const ChangeView = (props: { location: LatLngTuple }) => {
   const map = useMap();
