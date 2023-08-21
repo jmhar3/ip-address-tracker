@@ -30,7 +30,7 @@ export const SearchInput = (props: SearchInputProps) => {
 
   const onEnterSubmit = React.useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) =>
-      event.key == "13" && onSubmit(searchQuery),
+      event.key == "Enter" && onSubmit(searchQuery),
     [onSubmit, searchQuery]
   );
 
